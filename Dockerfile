@@ -1,11 +1,12 @@
-# Etapa 1: Construção (Usando imagem oficial do Maven)
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+# Etapa 1: Build com Maven e Java 21
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests
+# Pula os testes para garantir o build rápido
+RUN mvn clean package -Dmaven.test.skip=true
 
-# Etapa 2: Execução (Apenas o Java para rodar leve)
-FROM eclipse-temurin:17-jre-alpine
+# Etapa 2: Execução com Java 21 Leve
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
