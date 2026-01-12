@@ -1,7 +1,6 @@
 export default function FavoritosHeader({ aoVoltar, stats }) {
   return (
     <div className="animate-in fade-in duration-500">
-      {/* Cabeçalho Laranja */}
       <div className="bg-gradient-to-r from-orange-400 to-red-600 -mx-6 -mt-6 p-12 text-white mb-8 shadow-inner">
         <div className="container mx-auto max-w-7xl">
           <button onClick={aoVoltar} className="text-sm font-bold opacity-80 hover:opacity-100 flex items-center gap-2 mb-4">
@@ -15,7 +14,6 @@ export default function FavoritosHeader({ aoVoltar, stats }) {
       </div>
 
       <div className="container mx-auto max-w-7xl px-6">
-        {/* Box Informativo */}
         <div className="bg-blue-50 border border-blue-100 p-6 rounded-2xl mb-8 flex items-start gap-4">
           <span className="text-blue-500 text-2xl">🔔</span>
           <div>
@@ -26,7 +24,6 @@ export default function FavoritosHeader({ aoVoltar, stats }) {
           </div>
         </div>
 
-        {/* Estatísticas de Favoritos */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <StatCard title="Locais Favoritos" value={stats.favoritos} icon="⭐" color="orange" />
           <StatCard title="Notificações Ativas" value={stats.notificacoes} icon="🔔" color="blue" />

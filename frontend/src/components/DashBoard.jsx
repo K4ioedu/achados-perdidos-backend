@@ -6,7 +6,6 @@ export default function Dashboard({ usuarioId }) {
   const [meusItens, setMeusItens] = useState([]);
 
   useEffect(() => {
-    // Chama o endpoint Java que já tens no Controller
     api.get(`/api/itens/meus-itens/${usuarioId}`)
       .then(response => setMeusItens(response.data))
       .catch(err => console.error("Erro ao carregar teus itens:", err));

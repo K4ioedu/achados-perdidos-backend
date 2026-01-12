@@ -9,7 +9,6 @@ export default function ModalDetalhes({ item, isOpen, onClose }) {
         <div className="relative h-64 sm:h-80 bg-gray-200">
           <img src={imagemSrc} alt={item.titulo} className="w-full h-full object-cover" />
           
-          {/* RF06: Indicador se houver mais fotos na galeria  */}
           {item.fotos && item.fotos.length > 1 && (
              <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-bold">
                +{item.fotos.length - 1} fotos
@@ -44,7 +43,6 @@ export default function ModalDetalhes({ item, isOpen, onClose }) {
             </p>
           </div>
 
-          {/* RF09: Sistema de Reivindicação  */}
           {!item.devolvido && (
             <div className="flex gap-4">
               {item.status === 'Achado' ? (

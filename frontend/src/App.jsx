@@ -1,16 +1,15 @@
 import { useState } from 'react';
-// IMPORTANTE: Verifique se os nomes dos arquivos na pasta components são EXATAMENTE esses:
 import ItemCard from './components/ItemCard'; 
 import Hero from './components/Hero';
-import FilterBar from './components/Filterbar'; // Verifique se é FilterBar.jsx ou Filterbar.jsx
+import FilterBar from './components/Filterbar';
 import ModalReportar from './components/ModalReportar';
 import ModalDetalhes from './components/ModalDetalhes';
-import ItemCardDashboard from './components/ItemCardDashBoard'; // Verifique se o arquivo chama ItemCardDashboard.jsx
-import DashboardStats from './components/DashBoardStats'; // Verifique se é DashboardStats.jsx
+import ItemCardDashboard from './components/ItemCardDashBoard'; 
+import DashboardStats from './components/DashBoardStats';
 import FavoritosHeader from './components/FavoritosHeader';
 import LocalCard from './components/LocalCard';
 
-// MOCKS DE DADOS (Mantém o app rodando mesmo sem backend)
+// Simulação de dados
 const MOCK_ITENS = [
   { id: 1, usuarioId: 1, titulo: "Mochila Azul", local: "Biblioteca Central", categoria: "Materiais de Estudo", imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500", fotos: ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"], status: "Perdido", devolvido: false, descricao: "Mochila azul com zíper quebrado.", reivindicacoes: 3, dataISO: "2026-01-04" },
   { id: 2, usuarioId: 1, titulo: "iPhone 12", local: "Bloco A - Sala 04", categoria: "Eletrônicos", imageUrl: "https://images.unsplash.com/photo-1611791485932-50e8999a544d?w=500", fotos: ["https://images.unsplash.com/photo-1611791485932-50e8999a544d?w=500"], status: "Achado", devolvido: false, descricao: "iPhone 12 preto com capa.", reivindicacoes: 1, dataISO: "2026-01-05" },
@@ -25,7 +24,6 @@ const MOCK_LOCAIS = [
 ];
 
 function App() {
-  // --- ESTADOS ---
   const [abaAtiva, setAbaAtiva] = useState('home'); 
   const [itens, setItens] = useState(MOCK_ITENS);
   const [locais, setLocais] = useState(MOCK_LOCAIS);
@@ -43,7 +41,6 @@ function App() {
 
   const USUARIO_ID_TESTE = 1;
 
-  // --- LÓGICA DE FILTRAGEM ---
   const itensFiltrados = itens.filter(item => {
     const matchLocal = localAtivo === "Todos os Locais" || item.local.includes(localAtivo);
     const matchCat = catAtiva === "Todos" || item.categoria === catAtiva;
@@ -65,7 +62,6 @@ function App() {
     return matchLocal && matchCat && matchBusca && matchTipo && matchPeriodo && !item.devolvido;
   });
 
-  // --- FUNÇÕES DE AÇÃO ---
   const handleMarcarDevolvido = (id) => {
     if(window.confirm("Confirmar devolução?")) {
       setItens(prev => prev.map(item => item.id === id ? { ...item, devolvido: true } : item));
@@ -90,7 +86,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20 font-sans">
-      {/* HEADER FIXO */}
       <header className="bg-white border-b p-4 sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center max-w-7xl">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => setAbaAtiva('home')}>
@@ -110,7 +105,7 @@ function App() {
         </div>
       </header>
 
-      {/* TELA HOME */}
+      {/* Home */}
       {abaAtiva === 'home' && (
         <div className="animate-in fade-in duration-500">
           <Hero aoClicar={(tipo) => { setTipoModal(tipo); setModalAberto(true); }} />
@@ -153,7 +148,7 @@ function App() {
         </div>
       )}
 
-      {/* TELA DASHBOARD */}
+      {/* Tela Dashboard */}
       {abaAtiva === 'dashboard' && (
         <div className="animate-in slide-in-from-bottom-6 fade-in duration-700">
           <div className="bg-gradient-to-r from-blue-600 to-purple-700 p-16 text-white mb-10 shadow-lg">
@@ -199,7 +194,7 @@ function App() {
         </div>
       )}
 
-      {/* TELA FAVORITOS */}
+      {/* Tela favoritos */}
       {abaAtiva === 'favoritos' && (
         <div className="animate-in fade-in duration-500">
           <FavoritosHeader aoVoltar={() => setAbaAtiva('home')} stats={{ favoritos: locais.filter(l => l.isFavorito).length, notificacoes: 2, itens: 25 }} />
@@ -211,7 +206,7 @@ function App() {
         </div>
       )}
 
-      {/* MODAIS */}
+      {/* Modais */}
       <ModalReportar isOpen={modalAberto} onClose={() => setModalAberto(false)} tipo={tipoModal} onSalvar={handleNovoItem} />
       <ModalDetalhes item={itemSelecionado} isOpen={!!itemSelecionado} onClose={() => setItemSelecionado(null)} />
     </div>

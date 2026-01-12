@@ -7,7 +7,6 @@ export default function FilterBar({
   return (
     <div className="flex flex-col gap-8 w-full">
       
-      {/* 1. Abas Superiores (Tipo de Item) */}
       <div className="flex justify-center gap-3">
         <button 
           onClick={() => setTipoFiltro('todos')}
@@ -29,7 +28,6 @@ export default function FilterBar({
         </button>
       </div>
 
-      {/* 2. Filtrar por Local */}
       <section>
         <h4 className="text-gray-700 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wide">
           <span className="text-lg">📍</span> Filtrar por Local
@@ -49,7 +47,6 @@ export default function FilterBar({
         </div>
       </section>
 
-      {/* 3. Filtrar por Categoria */}
       <section>
         <h4 className="text-gray-700 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wide">
           <span className="text-lg">📦</span> Filtrar por Categoria
@@ -69,7 +66,6 @@ export default function FilterBar({
         </div>
       </section>
 
-      {/* 4. Filtrar por Período */}
       <section>
         <h4 className="text-gray-700 font-bold text-sm mb-4 flex items-center gap-2">
           <span>🕒</span> Filtrar por Período
@@ -78,7 +74,7 @@ export default function FilterBar({
           {["Todos", "Últimas 24h", "Esta Semana", "Este Mês"].map(periodo => (
             <button 
               key={periodo}
-              onClick={() => setPeriodoAtivo(periodo)} // Ação de clique!
+              onClick={() => setPeriodoAtivo(periodo)} 
               className={`px-4 py-2 rounded-full text-[11px] font-bold border transition-all ${
                 periodoAtivo === periodo 
                 ? 'bg-orange-600 text-white border-orange-600' 

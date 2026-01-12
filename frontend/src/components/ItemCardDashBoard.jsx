@@ -22,9 +22,7 @@ export default function ItemCardDashboard({ item, onMarcarDevolvido, onExcluir, 
         </div>
       </div>
 
-      {/* Botões de Ação Lateral */}
       <div className="flex gap-2">
-        {/* Editar (Lápis Azul) */}
         <button 
           onClick={() => onEditar(item)} 
           className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 transition-colors"
@@ -33,7 +31,6 @@ export default function ItemCardDashboard({ item, onMarcarDevolvido, onExcluir, 
           ✏️
         </button>
 
-        {/* Marcar Devolvido (Check Verde) */}
         <button 
           onClick={() => onMarcarDevolvido(item.id)} 
           className="p-3 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 transition-colors"
@@ -42,7 +39,6 @@ export default function ItemCardDashboard({ item, onMarcarDevolvido, onExcluir, 
           ✅
         </button>
 
-        {/* Visualizar Detalhes (Olho Cinza) - FUNÇÃO RESTAURADA */}
         <button 
           onClick={() => onVerDetalhes(item)} 
           className="p-3 bg-gray-50 text-gray-600 rounded-xl hover:bg-gray-100 transition-colors"
@@ -51,7 +47,6 @@ export default function ItemCardDashboard({ item, onMarcarDevolvido, onExcluir, 
           👁️
         </button>
 
-        {/* Excluir (Lixo Vermelho) */}
         <button 
           onClick={() => onExcluir(item.id)} 
           className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors"

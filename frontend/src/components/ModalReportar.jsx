@@ -5,7 +5,6 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
 
   const isPerdi = tipo === 'perdi';
   
-  // Estados para o formulário
   const [formData, setFormData] = useState({
     nome: "",
     descricao: "",
@@ -20,15 +19,15 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
   const handleFileChange = (e) => {
     if (e.target.files && fotos.length < 5) {
       const newFiles = Array.from(e.target.files).map(file => URL.createObjectURL(file));
-      setFotos(prev => [...prev, ...newFiles].slice(0, 5)); // Limite de 5 fotos 
+      setFotos(prev => [...prev, ...newFiles].slice(0, 5)); 
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validação de E-mail Institucional (RN01) 
-    if (!formData.email.endsWith("@universidade.edu.br")) {
+    
+    if (!formData.email.endsWith("@alu.ufc.br")) {
       alert("Apenas e-mails institucionais são aceitos para garantir segurança.");
       return;
     }
@@ -50,7 +49,7 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
       reivindicacoes: 0
     };
 
-    onSalvar(novoItem); // Envia para o App.jsx
+    onSalvar(novoItem); 
     onClose();
   };
 
@@ -58,7 +57,6 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[60] p-4 animate-in fade-in">
       <div className="bg-white w-full max-w-xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
         
-        {/* Header Dinâmico */}
         <div className={`p-6 flex justify-between items-start ${isPerdi ? 'bg-red-50' : 'bg-green-50'}`}>
           <div>
             <h2 className={`text-xl font-bold ${isPerdi ? 'text-red-900' : 'text-green-900'}`}>
@@ -73,7 +71,6 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
 
         <form onSubmit={handleSubmit} className="p-8 overflow-y-auto space-y-5">
           
-          {/* RF06: Galeria de Fotos */}
           <div>
             <label className="text-xs font-bold text-gray-500 mb-2 block uppercase tracking-wider">
               Fotos do Item * <span className="font-normal">(até 5 fotos: frente, verso, detalhes)</span>
@@ -89,7 +86,6 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
             </div>
           </div>
 
-          {/* Nome e Descrição */}
           <div className="space-y-4">
             <div>
               <label className="text-xs font-bold text-gray-600 mb-1 block">Nome do Item *</label>
@@ -101,7 +97,6 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
             </div>
           </div>
 
-          {/* Categoria e Local (RF02, RF03) */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-xs font-bold text-gray-600 mb-1 block">Categoria *</label>
@@ -120,7 +115,6 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
             </div>
           </div>
 
-          {/* Detalhes e Data */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-xs font-bold text-gray-600 mb-1 block">Detalhes do Local</label>
@@ -132,14 +126,12 @@ export default function ModalReportar({ isOpen, onClose, tipo, onSalvar }) {
             </div>
           </div>
 
-          {/* Email Institucional (RN01) */}
           <div>
             <label className="text-xs font-bold text-gray-600 mb-1 block">Email Institucional * <span className="font-normal text-gray-400 text-[10px]">(segurança validada)</span></label>
             <input required type="email" className="w-full border border-gray-200 rounded-xl p-3 text-sm" placeholder="seu.nome@alu.ufc.br" onChange={e => setFormData({...formData, email: e.target.value})} />
             <p className="text-[10px] text-gray-400 mt-2">Apenas emails institucionais são aceitos para garantir segurança.</p>
           </div>
 
-          {/* Ações Finais */}
           <div className="flex gap-4 pt-4">
             <button type="button" onClick={onClose} className="flex-1 py-3 border border-gray-200 rounded-xl font-bold text-gray-500 hover:bg-gray-50">Cancelar</button>
             <button type="submit" className={`flex-1 py-3 rounded-xl font-bold text-white shadow-lg transition-transform active:scale-95 ${isPerdi ? 'bg-red-600' : 'bg-green-600'}`}>
