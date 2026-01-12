@@ -79,10 +79,10 @@ function App() {
   };
 
   const handleNovoItem = (novoItem) => {
-  setItens(prev => [novoItem, ...prev]);
-  alert(`${novoItem.status === 'Perdido' ? 'Alerta de perda' : 'Item encontrado'} publicado com sucesso!`);
-  setAbaAtiva('dashboard'); 
-};
+    setItens(prev => [novoItem, ...prev]);
+    alert(`${novoItem.status === 'Perdido' ? 'Alerta de perda' : 'Item encontrado'} publicado com sucesso!`);
+    setAbaAtiva('dashboard'); 
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20 font-sans">
@@ -111,21 +111,14 @@ function App() {
           <Hero aoClicar={(tipo) => { setTipoModal(tipo); setModalAberto(true); }} />
           
           <main className="container mx-auto p-6 max-w-7xl">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-              <div className="flex bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm">
-                {['todos', 'perdido', 'achado'].map((t) => (
-                  <button key={t} onClick={() => setTipoFiltro(t)} className={`px-6 py-2 rounded-xl font-bold text-[11px] uppercase tracking-wider ${tipoFiltro === t ? 'bg-blue-600 text-white' : 'text-gray-400'}`}>
-                    {t === 'todos' ? 'Todos' : t}
-                  </button>
-                ))}
-              </div>
+            <div className="flex flex-col md:flex-row justify-end items-center gap-6 mb-12">
               <button 
-              onClick={() => setAbaAtiva('dashboard')}
-              className="flex items-center gap-2 bg-white border-2 border-blue-600 text-blue-600 px-6 py-2.5 rounded-2xl font-black text-xs uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(37,99,235,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
-            >
-              <span className="text-lg">📋</span>
-              Meus anúncios
-            </button>
+                onClick={() => setAbaAtiva('dashboard')}
+                className="flex items-center gap-2 bg-white border-2 border-blue-600 text-blue-600 px-6 py-2.5 rounded-2xl font-black text-xs uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(37,99,235,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+              >
+                <span className="text-lg">📋</span>
+                Meus anúncios
+              </button>
             </div>
 
             <FilterBar 
@@ -147,8 +140,7 @@ function App() {
           </main>
         </div>
       )}
-
-      {/* Tela Dashboard */}
+      
       {abaAtiva === 'dashboard' && (
         <div className="animate-in slide-in-from-bottom-6 fade-in duration-700">
           <div className="bg-gradient-to-r from-blue-600 to-purple-700 p-16 text-white mb-10 shadow-lg">
@@ -194,7 +186,6 @@ function App() {
         </div>
       )}
 
-      {/* Tela favoritos */}
       {abaAtiva === 'favoritos' && (
         <div className="animate-in fade-in duration-500">
           <FavoritosHeader aoVoltar={() => setAbaAtiva('home')} stats={{ favoritos: locais.filter(l => l.isFavorito).length, notificacoes: 2, itens: 25 }} />
@@ -206,7 +197,6 @@ function App() {
         </div>
       )}
 
-      {/* Modais */}
       <ModalReportar isOpen={modalAberto} onClose={() => setModalAberto(false)} tipo={tipoModal} onSalvar={handleNovoItem} />
       <ModalDetalhes item={itemSelecionado} isOpen={!!itemSelecionado} onClose={() => setItemSelecionado(null)} />
     </div>
