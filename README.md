@@ -14,79 +14,52 @@ O sistema resolve o problema da descentralização de informações sobre itens 
 
 > 🔒 **Segurança:** O sistema conta com validação que restringe o cadastro apenas a usuários com e-mail institucional (`@alu.ufc.br` ou `@ufc.br`).
 
-## 🏗️ Arquitetura do Sistema
+---
 
-```mermaid
-graph TD
-    User((Usuário UFC))
-    
-    subgraph "Front-End (Vite/React)"
-        UI[Interface Web - React]
-        Axios[Cliente HTTP Axios]
-    end
-    
-    subgraph "Back-End (Render Cloud)"
-        API[Spring Boot REST API]
-        Security[Spring Security]
-        Model[Entidades Item/Usuário]
-    end
-    
-    subgraph "Banco de Dados"
-        DB[(PostgreSQL)]
-    end
-
-    User -->|Acessa| UI
-    UI -->|JSON / Multipart| Axios
-    Axios -->|HTTPS Request| API
-
-    
-    API -->|Valida Regras| Security
-    API -->|CRUD| Model
-    Model -->|SQL + BLOB| DB
-
-```
-
-```markdown
 ## 🚀 Tecnologias Utilizadas
 
-O projeto foi desenvolvido seguindo a arquitetura **SPA (Single Page Application)**.
+O projeto foi desenvolvido seguindo a arquitetura **SPA (Single Page Application)**, separando o Front-end do Back-end.
 
 ### 🧠 Back-End (API REST)
-* **Java 21:** Linguagem base (LTS).
-* **Spring Boot 3:** Framework principal.
-* **Spring Data JPA:** Persistência de dados.
-* **Spring Security:** Configuração de CORS e Segurança.
+* **Java 21:** Linguagem base, utilizando recursos modernos da versão LTS.
+* **Spring Boot 3:** Framework principal para criação da API.
+* **Spring Data JPA:** Camada de persistência de dados.
+* **Spring Security:** Configuração de CORS e segurança das rotas.
 * **PostgreSQL:** Banco de dados relacional (Armazenamento de dados e imagens via BLOB).
 * **Maven:** Gerenciamento de dependências.
 * **Render:** Hospedagem em nuvem (Deploy).
 
 ### 🎨 Front-End (Interface)
-* **React.js:** Biblioteca para interface do usuário.
-* **Vite:** Build tool de alta performance.
-* **Tailwind CSS:** Estilização utilitária e responsiva.
-* **Axios:** Integração com a API.
+* **React.js:** Biblioteca para construção da interface do usuário.
+* **Vite:** Ferramenta de build de alta performance.
+* **Tailwind CSS:** Framework de estilização utilitária e responsiva.
+* **Axios:** Cliente HTTP para integração com a API.
 * **Lucide React:** Biblioteca de ícones.
+
+---
 
 ## ⚙️ Funcionalidades
 
 1.  **Cadastro e Login Institucional**
-    * Validação automática de domínio de e-mail universitário.
+    * Validação automática de domínio de e-mail universitário para garantir segurança.
 2.  **Reportar Item (Achado ou Perdido)**
-    * Upload de imagem do item (armazenado no banco).
-    * Categorização (Eletrônicos, Documentos, etc.).
-    * Definição de local (Bloco, Sala).
+    * Upload de imagem do item (armazenado diretamente no banco de dados).
+    * Categorização (Eletrônicos, Documentos, Vestuário, etc.).
+    * Definição de local (Bloco, Sala, Área Comum).
 3.  **Feed de Itens**
-    * Listagem visual com cards.
+    * Listagem visual com cards interativos.
     * Indicadores de status (Perdido, Achado, Devolvido).
 4.  **Devolução**
-    * Fluxo para marcar item como "Recuperado/Devolvido".
+    * Fluxo funcional para marcar um item como "Recuperado/Devolvido", encerrando o ciclo.
+
+---
 
 ## 🔧 Como Executar o Projeto Localmente
 
 ### Pré-requisitos
-* Java JDK 21
-* Node.js e NPM
-* PostgreSQL
+* Java JDK 21 instalado.
+* Node.js e NPM instalados.
+* PostgreSQL (Local ou Nuvem).
 
 ### 1. Back-End (API)
 
@@ -94,20 +67,25 @@ O projeto foi desenvolvido seguindo a arquitetura **SPA (Single Page Application
 # Clone o repositório
 git clone [https://github.com/K4ioedu/achados-perdidos-backend.git](https://github.com/K4ioedu/achados-perdidos-backend.git)
 
-# Acesse a pasta
+# Acesse a pasta do projeto
 cd achados-perdidos-backend
 
-# Instale as dependências e rode
+# Instale as dependências e inicie a aplicação
 mvn spring-boot:run
+A API estará rodando em: http://localhost:8080
+
+2. Front-End (Web)
+Bash
 
 # Abra um novo terminal e acesse a pasta do frontend
 cd frontend
 
-# Instale as dependências
+# Instale as dependências do projeto
 npm install
 
 # Inicie o servidor de desenvolvimento
 npm run dev
+O Front-end estará rodando em: http://localhost:5173 (ou porta similar)
 
 👥 Autores
 Trabalho desenvolvido para a disciplina de Desenvolvimento de Software para Web - Ciência da Computação (UFC).
@@ -120,4 +98,3 @@ Kelve Monteiro Cartaxo
 
 📄 Licença
 Este projeto é de cunho educacional.
-
